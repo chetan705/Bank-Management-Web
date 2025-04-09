@@ -51,7 +51,7 @@
     }
 
     h1, h2 {
-        font-size: 2.5rem;
+        font-size: 1.5rem;
         text-align: center;
     }
 
@@ -93,11 +93,11 @@
         background: linear-gradient(135deg, #2d3b55, #1e90ff);
         color: #fff;
         text-align: center;
-        padding: 5rem 1rem;
+        padding: 3rem 1rem;
     }
 
     .banner-content h1 {
-        font-size: 3rem;
+        font-size: 1.5rem;
         margin-bottom: 1rem;
     }
 
@@ -109,7 +109,7 @@
     .highlights {
         display: flex;
         justify-content: space-around;
-        margin: 4rem 1rem;
+        margin: 2rem 1rem;
     }
 
     .highlight-item {

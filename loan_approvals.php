@@ -1,5 +1,4 @@
 <?php 
-include 'includes/header.php'; 
 include 'db/db_connection.php'; 
 session_start();
 
@@ -12,8 +11,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $loan_id = $_POST['loan_id'];
     $action = $_POST['action'];
     $status = $action === 'approve' ? 'Approved' : 'Rejected';
-    $update_loan_query = "UPDATE loans SET status = '$status' WHERE id = $loan_id";
-    $conn->query($update_loan_query);
+
+    if ($action === 'approve') {
+        $conn->begin_transaction();
+
+        $loan_query = "SELECT user_id, amount, remaining_amount FROM loans WHERE id = ?";
+        $loan_stmt = $conn->prepare($loan_query);
+        $loan_stmt->bind_param("i", $loan_id);
+        $loan_stmt->execute();
+        $loan = $loan_stmt->get_result()->fetch_assoc();
+
+        if ($loan) {
+            $user_id = $loan['user_id'];
+            $loan_amount = $loan['amount'];
+            $remaining_amount = $loan['remaining_amount'] ?? $loan_amount;
+
+            $update_loan_query = "UPDATE loans SET status = ?, remaining_amount = ? WHERE id = ?";
+            $update_stmt = $conn->prepare($update_loan_query);
+            $update_stmt->bind_param("sdi", $status, $remaining_amount, $loan_id);
+            $update_stmt->execute();
+
+            $update_user_query = "UPDATE users SET balance = balance + ? WHERE id = ?";
+            $user_stmt = $conn->prepare($update_user_query);
+            $user_stmt->bind_param("di", $loan_amount, $user_id);
+            $user_stmt->execute();
+
+            $conn->commit();
+        } else {
+            $conn->rollback();
+        }
+    } else {
+        $update_loan_query = "UPDATE loans SET status = ? WHERE id = ?";
+        $update_stmt = $conn->prepare($update_loan_query);
+        $update_stmt->bind_param("si", $status, $loan_id);
+        $update_stmt->execute();
+    }
 }
 
 $loans_query = "SELECT * FROM loans WHERE status = 'Pending'";
@@ -77,6 +109,7 @@ $loans = $conn->query($loans_query);
             padding: 15px;
             text-align: left;
             border: 1px solid #ddd;
+            min-width: 80px;
         }
 
         .table tbody tr:hover {
@@ -132,19 +165,91 @@ $loans = $conn->query($loans_query);
             text-decoration: underline;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1200px) {
             .loan-approvals {
-                padding: 20px;
+                max-width: 90%;
+                padding: 30px;
             }
-
             .table th, .table td {
-                font-size: 14px;
-                padding: 10px;
+                padding: 12px;
+                min-width: 70px;
+                font-size: 16px;
             }
-
             .btn-approve, .btn-reject {
                 padding: 8px 12px;
                 font-size: 14px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .loan-approvals {
+                max-width: 95%;
+                padding: 20px;
+            }
+            .loan-approvals h2 {
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
+            .table th, .table td {
+                padding: 10px;
+                min-width: 60px;
+                font-size: 14px;
+            }
+            .btn-approve, .btn-reject {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            a {
+                font-size: 14px;
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .loan-approvals {
+                max-width: 95%;
+                padding: 15px;
+            }
+            .loan-approvals h2 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+            .table th, .table td {
+                padding: 8px;
+                min-width: 50px;
+                font-size: 12px;
+            }
+            .btn-approve, .btn-reject {
+                padding: 5px 8px;
+                font-size: 10px;
+            }
+            a {
+                font-size: 13px;
+                margin-top: 12px;
+            }
+        }
+
+        @media (max-width: 200px) {
+            .loan-approvals {
+                max-width: 100%;
+                padding: 10px;
+            }
+            .loan-approvals h2 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+            .table th, .table td {
+                padding: 5px;
+                min-width: 30px;
+                font-size: 8px;
+            }
+            .btn-approve, .btn-reject {
+                padding: 3px 6px;
+                font-size: 8px;
+            }
+            a {
+                font-size: 10px;
+                margin-top: 8px;
             }
         }
     </style>

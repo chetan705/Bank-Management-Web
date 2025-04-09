@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = ""; // Default XAMPP password
+$password = ""; 
 $database = "bank_management_new";
 
 $conn = new mysqli($servername, $username, $password, $database);

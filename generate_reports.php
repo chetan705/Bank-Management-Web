@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         section {
             margin: 20px auto;
-            max-width: 800px;
+            max-width: 850px;
             background: white;
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -80,6 +80,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
+        }
+        input, div, year{
+            width:98%;
         }
         button {
             background-color: #003366;

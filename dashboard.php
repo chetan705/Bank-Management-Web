@@ -49,12 +49,12 @@ $transactions = $transaction_stmt->get_result();
 </head>
 <body>
     <header>
+        <img src="assests/download1.jpg" alt="Bank Logo" class="logo">
         <h1>Welcome, <?= htmlspecialchars($user['name']) ?>!</h1>
     </header>
     <nav>
         <ul>
             <li><a href="dashboard.php" class="active">Home</a></li>
-            
             <li><a href="loan_management.php">Loan Management</a></li>
             <li><a href="fixed_deposit_management.php">Fixed Deposits</a></li>
             <li><a href="logout.php?role=user">Logout</a></li>
@@ -80,7 +80,7 @@ $transactions = $transaction_stmt->get_result();
 
             <div class="card loan">
                 <h3>Loan Management</h3>
-                <a href="loan_application.php" class="btn">Apply for a Loan</a> <!-- Changed this line -->
+                <a href="loan_application.php" class="btn">Apply for a Loan</a>
                 <h4>Active Loans</h4>
                 <?php if ($loans->num_rows > 0): ?>
                     <ul>
@@ -98,7 +98,7 @@ $transactions = $transaction_stmt->get_result();
 
             <div class="card deposit">
                 <h3>Fixed Deposits</h3>
-                <a href="fixed_deposit.php" class="btn">Open a New Fixed Deposit</a> <!-- Changed this line -->
+                <a href="fixed_deposit.php" class="btn">Open a New Fixed Deposit</a>
                 <h4>Active Fixed Deposits</h4>
                 <?php if ($fixed_deposits->num_rows > 0): ?>
                     <ul>
@@ -145,7 +145,7 @@ $transactions = $transaction_stmt->get_result();
     </div>
 
     <footer>
-        <p>Bank Management System &copy; 2024</p>
+        <p>Bank Management System © 2024</p>
     </footer>
 </body>
 </html>
