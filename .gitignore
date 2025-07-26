@@ -1,0 +1,9 @@
+# Ignore database credentials
+db/db_connection.php
+# Ignore temporary files
+*.log
+*.tmp
+# Ignore vendor dependencies (if using Composer)
+vendor/
+# Ignore IDE-specific files
+.vscode/
