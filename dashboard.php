@@ -46,6 +46,7 @@ $transactions = $transaction_stmt->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Bank Management</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <header>
@@ -53,7 +54,10 @@ $transactions = $transaction_stmt->get_result();
         <h1>Welcome, <?= htmlspecialchars($user['name']) ?>!</h1>
     </header>
     <nav>
-        <ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-menu">
             <li><a href="dashboard.php" class="active">Home</a></li>
             <li><a href="loan_management.php">Loan Management</a></li>
             <li><a href="fixed_deposit_management.php">Fixed Deposits</a></li>
@@ -75,6 +79,9 @@ $transactions = $transaction_stmt->get_result();
                     <a href="deposit.php" class="btn">Deposit Funds</a>
                     <a href="withdraw.php" class="btn">Withdraw Funds</a>
                     <a href="transfer.php" class="btn">Transfer Money</a>
+                    <a href="saving_goal.php" class="btn">Savings Goals</a>
+                    <a href="transaction_analytics.php" class="btn">Transaction Analytics</a>
+                    <a href="fd_predictor.php" class="btn">FD Maturity Predictor</a>
                 </div>
             </div>
 
@@ -147,5 +154,11 @@ $transactions = $transaction_stmt->get_result();
     <footer>
         <p>Bank Management System © 2024</p>
     </footer>
+
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>

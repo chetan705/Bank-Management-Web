@@ -48,6 +48,71 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Fixed Deposit</title>
+    <style>
+        .form-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .form-container h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-container label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #555;
+            display: block;
+        }
+        .form-container input, .form-container select, .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        .form-container .error {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+        }
+        .form-container p {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .form-container a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .form-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
 <section class="form-container">
     <form method="POST">
         <h2>Create Fixed Deposit</h2>
@@ -75,71 +140,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p><a href="dashboard.php">Back to Dashboard</a></p>
     </form>
 </section>
-
-<style>
-
-.form-container {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-}
-
-.form-container h2 {
-    text-align: center;
-    color: #333;
-}
-
-.form-container label {
-    font-size: 16px;
-    margin-bottom: 5px;
-    color: #555;
-    display: block;
-}
-
-.form-container input, .form-container select, .form-container textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.form-container button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.form-container button:hover {
-    background-color: #45a049;
-}
-
-.form-container .error {
-    color: red;
-    font-weight: bold;
-    text-align: center;
-}
-
-.form-container p {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.form-container a {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-.form-container a:hover {
-    text-decoration: underline;
-}
-</style>
+</body>
+</html>
